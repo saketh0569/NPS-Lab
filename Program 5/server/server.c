@@ -2,7 +2,6 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <string.h>
-
  
 int compare_strings(char a[], char b[])
 {
