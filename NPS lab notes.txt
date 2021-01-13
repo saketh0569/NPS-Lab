@@ -1,0 +1,11 @@
+tcp -> connection
+udp -> connectionless
+concurrent -> many at a time
+iterative -> one at a time
+
+no concurrent server for udp
+
+
+
+gcc -o objName fileName.c
+command for object creation
