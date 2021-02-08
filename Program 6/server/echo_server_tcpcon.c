@@ -6,9 +6,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <fcntl.h>
-#include <arpa/inet.h> 
+#include <arpa/inet.h>
  
-void str_echo(int connfd)			
+void str_echo(int connfd)		
 {
 	int n;
 	int bufsize = 1024;
@@ -19,7 +19,7 @@ again:
 		
 	if(n < 0)
 		goto again;	
-		
+		 
 	free(buffer);
 }
 
@@ -51,11 +51,14 @@ int main()
 	{
 		addrlen = sizeof(struct sockaddr_in);
 		connfd = accept(listenfd, (struct sockaddr *)&cli_address, &addrlen);
+
 		int i = getpeername(connfd,(struct sockaddr *)&cli_address,&addrlen);
 		
 		if (connfd > 0)
-			printf("The Client  %s is connected ... on port %d\n", inet_ntoa(cli_address.sin_addr), htons(cli_address.sin_port));	
+			printf("The Client  %s is connected ... on port %d\n", inet_ntoa(cli_address.sin_addr), htons(cli_address.sin_port));
 
+
+		// different
 		if ((pid = fork()) == 0)
 		{
 			printf("inside child\n");

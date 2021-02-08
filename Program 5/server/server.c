@@ -2,7 +2,7 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <string.h>
- 
+
 int compare_strings(char a[], char b[])
 {
     int c = 0;
@@ -13,9 +13,9 @@ int compare_strings(char a[], char b[])
         c++;
     }
     if (a[c] == '\0' && b[c] == '\0')
-    return 0;
+        return 0;
     else
-    return -1;
+        return -1;
 }
 
 int main() {

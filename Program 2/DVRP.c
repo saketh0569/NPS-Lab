@@ -26,6 +26,7 @@ void Bellmanford()
             if (d[v] > d[u] + A[u][v])
             {
                 printf("Negative Edge\n");
+                printf("There is a negative edge");
                 exit(0);
             }
         }
@@ -34,9 +35,9 @@ void Bellmanford()
 
 int main()
 {
-    printf("Enter the no of vertices: ");
+    printf("Enter the no of vertices (or) nodes: ");
     scanf("%d", &n);
-    printf("Enter the adjacency martix \n");
+    printf("Enter the adjacency martix (or) the cost matrix\n");
     int i, j;
     for (i = 0; i < n; i++)
         for (j = 0; j < n; j++)

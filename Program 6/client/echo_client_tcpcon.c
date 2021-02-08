@@ -39,7 +39,7 @@ int main(int argc,char *argv[])
 	if (connect(create_socket, (struct sockaddr *)&address, sizeof(address)) == 0)
 		printf("The connection was accepted with the server %s...\n",argv[1]);
 	else
-		printf("Error in connect\n");			
+		printf("Error in connect\n");	
 		
 	str_cli(stdin, create_socket);				
 

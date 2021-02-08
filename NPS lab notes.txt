@@ -3,9 +3,15 @@ udp -> connectionless
 concurrent -> many at a time
 iterative -> one at a time
 
-no concurrent server for udp
+no concurrent server for udp, 
+udp has only iterative server
 
 
 
 gcc -o objName fileName.c
 command for object creation
+
+./objName
+for executing the file named fileName
+
+

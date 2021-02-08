@@ -1,2 +1,2 @@
 # NPS-Lab
-5th Semester Lab Internals
+5th Semester Network Programming and Security Lab Programs

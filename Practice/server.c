@@ -9,7 +9,7 @@
 #include <arpa/inet.h>
 int main() 
 {
-  int cont,create_socket, new_socket, addrlen,fd;
+  int cont,create_socket,new_socket,addrlen,fd;
   int bufsize = 1024;
   char *buffer = malloc(bufsize);
   char fname[256];
