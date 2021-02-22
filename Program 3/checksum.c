@@ -9,7 +9,7 @@ unsigned short checksum()
 
     for (i = 0; i < 9; i++)
     {
-        printf("Word %d : ", i + 1);
+        printf("Word %d : ", i + 1); 
         scanf("%x", &words[i]);
 
         sum = sum + (unsigned short)words[i];

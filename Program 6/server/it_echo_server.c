@@ -26,7 +26,7 @@ int main()
 	int cont, listenfd, connfd, addrlen, addrlen2, fd, pid, addrlen3;
 
 	//char fname[256];
-	struct sockaddr_in address, cli_address;
+	struct sockaddr_in address;
 	if ((listenfd = socket(AF_INET, SOCK_STREAM, 0)) > 0)
 		printf("The socket was created\n");
 	address.sin_family = AF_INET;
@@ -44,10 +44,7 @@ int main()
 	for (;;)
 	{
 		addrlen = sizeof(struct sockaddr_in);
-		connfd = accept(listenfd, (struct sockaddr *)&cli_address, &addrlen);
-		/*if(connfd>0)
-			printf("The client is connected\n");*/
-		printf("The Client  %s is Connected...on port %d\n", inet_ntoa(cli_address.sin_addr), htons(cli_address.sin_port));
+		connfd = accept(listenfd, (struct sockaddr *)&address, &addrlen);
 
 		str_echo(connfd);
 		close(connfd);

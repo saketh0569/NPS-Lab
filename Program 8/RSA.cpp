@@ -25,6 +25,7 @@ long isprime(long a)
     return 1;
 }
 
+// for encryption, c=m^emodn
 long int encrypt(char ch, long n, long e)
 {
     int i;
@@ -34,6 +35,7 @@ long int encrypt(char ch, long n, long e)
     return temp;
 }
 
+// for decryption, m=c^dmodn
 char decrypt(long ch, long n, long d)
 {
     int i;
@@ -57,36 +59,49 @@ int main()
     {
         p = rand() % 1000;
     } while (!isprime(p) && p > 100);
+    // p is prime number > 100
+
     do
     {
         q = rand() % 1000;
     } while (!isprime(q) && q > 100);
+    // q is prime number > 100
+
     n = p * q;
-    phi = (p - 1) * (q - 1);
+    phi = (p - 1) * (q - 1); // Eulers toitent function
+    // and value of d, e should be between 1 and phi and e, phi should be co-primes
+    // d equivalents e^-1 * mod(phi),  i.e., d*e equivalents 1mod(phi)  =>  (d*e)mod(phi) = 1
+
     do
     {
         e = rand() % phi;
     } while (gcd(phi, e) != 1);
+
     do
     {
         d = rand() % phi;
     } while (((d * e) % phi) != 1);
-    cout << "Two prime numbers (p and q) are: " << p << " and " << q << endl;
-    cout << "n(p * q) = " << p << " * " << q << " = " << p * q << endl;
+
+    cout << "Two numbers (p and q) are: " << p << " and " << q << endl;
+    cout << "n = (p * q) = " << p << " * " << q << " = " << p * q << endl;
     cout << "(p - 1) * (q - 1) = " << phi << endl;
+
     cout << "Public key (n,  e): (" << n << ", " << e << ")\n";
     cout << "Private key (n, d): (" << n << ", " << d << ")\n";
+
     for (i = 0; i < len; i++)
         cipher[i] = encrypt(text[i], n, e);
     cout << "Encrypted message: ";
     for (i = 0; i < len; i++)
         cout << cipher[i];
+
     for (i = 0; i < len; i++)
         text[i] = decrypt(cipher[i], n, d);
     cout << endl;
     cout << "Decrypted message: ";
     for (i = 0; i < len; i++)
         cout << text[i];
+        
     cout << endl;
     return 0;
 }

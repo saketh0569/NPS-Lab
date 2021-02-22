@@ -26,7 +26,7 @@ again:
 int main()
 {
 	int listenfd, connfd, addrlen, pid, addrlen3;
-	struct sockaddr_in address, cli_address;		
+	struct sockaddr_in address, address;		
 	if ((listenfd = socket(AF_INET, SOCK_STREAM, 0)) > 0) 
 		printf("The socket was created\n");
 		
@@ -44,18 +44,19 @@ int main()
 	listen(listenfd, 3);			
 	printf("Server is listening\n");
 
-	getsockname(listenfd, (struct sockaddr *)&address, &addrlen3);
-	printf("The server's local address %s ... and port %d\n", inet_ntoa(address.sin_addr), htons(address.sin_port));
+	// getsockname() is used to get address of itself
+	// getsockname(listenfd, (struct sockaddr *)&address, &addrlen3);
+	// printf("The server's local address %s ... and port %d\n", inet_ntoa(address.sin_addr), htons(address.sin_port));
 	
 	for(;;)				
 	{
 		addrlen = sizeof(struct sockaddr_in);
-		connfd = accept(listenfd, (struct sockaddr *)&cli_address, &addrlen);
+		connfd = accept(listenfd, (struct sockaddr *)&address, &addrlen);
 
-		int i = getpeername(connfd,(struct sockaddr *)&cli_address,&addrlen);
-		
-		if (connfd > 0)
-			printf("The Client  %s is connected ... on port %d\n", inet_ntoa(cli_address.sin_addr), htons(cli_address.sin_port));
+		// getpeername() is used to get address of opponent, i.e., client
+		// int i = getpeername(connfd,(struct sockaddr *)&address,&addrlen);
+		// if (connfd > 0)
+		// 	printf("The Client  %s is connected ... on port %d\n", inet_ntoa(address.sin_addr), htons(address.sin_port));
 
 
 		// different

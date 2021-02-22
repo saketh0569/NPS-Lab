@@ -1,5 +1,8 @@
+// distance vector routing protocol
+// drawback: it can't solve the graph if it contains a negative weighted cycle in it
+
 #include <stdio.h>
-#include<stdlib.h>
+#include <stdlib.h>
 int A[10][10], n, d[10], p[10];
 
 void Bellmanford()
@@ -53,13 +56,15 @@ int main()
         }
         d[source] = 0;
         Bellmanford();
+
+        // prints all possibility routes of each node
         printf("Router %d \n", source);
         for (i = 0; i < n; i++)
         {
             if (i != source)
             {
                 j = i;
-                while (p[j] != -1)
+                while (p[j] != -1) //checks for unreachable states
                 {
                     printf("%d<-", j);
                     j = p[j];
