@@ -8,12 +8,14 @@
 #include <fcntl.h>
 #include <arpa/inet.h>
 
-void str_echo(int connfd, int port) {
+void str_echo(int connfd, int port)
+{
     int n;
     int bufsize = 1024;
     char *buffer = malloc(bufsize);
 again:
-    while ((n = recv(connfd, buffer, bufsize, 0)) > 0) {
+    while ((n = recv(connfd, buffer, bufsize, 0)) > 0)
+    {
         printf("\nPort:%d \n", port);
         fputs(buffer, stdout);
         printf("\nMessage to be sent to client at port %d:\n", port);
@@ -24,11 +26,13 @@ again:
         goto again;
 }
 
-int main() {
+int main()
+{
     int cont, listenfd, connfd, addrlen, addrlen2, fd, pid, addrlen3;
     struct sockaddr_in address;
 
-    if ((listenfd = socket(AF_INET, SOCK_STREAM, 0)) > 0) {
+    if ((listenfd = socket(AF_INET, SOCK_STREAM, 0)) > 0)
+    {
         printf("The socket was created\n");
     }
 
@@ -36,7 +40,8 @@ int main() {
     address.sin_addr.s_addr = INADDR_ANY;
     address.sin_port = htons(15001);
     printf("The address before bind %s...\n", inet_ntoa(address.sin_addr));
-    if (bind(listenfd, (struct sockaddr *)& address, sizeof(address)) == 0) {
+    if (bind(listenfd, (struct sockaddr *)&address, sizeof(address)) == 0)
+    {
         printf("Binding Socket\n");
     }
     printf("The address after bind %s...\n", inet_ntoa(address.sin_addr));
@@ -45,14 +50,16 @@ int main() {
     printf("Server is listening\n");
     getsockname(listenfd, (struct sockaddr *)&address, &addrlen3);
     printf("The server's local address %s... and port %d\n", inet_ntoa(address.sin_addr), htons(address.sin_port));
-    while (1) {
+    while (1)
+    {
         addrlen = sizeof(struct sockaddr_in);
-        connfd = accept(listenfd, (struct sockaddr*)& address, &addrlen);
-        addrlen2 = sizeof(struct sockaddr_in);
-        int i = getpeername(connfd, (struct sockaddr *)& address, &addrlen);
+        connfd = accept(listenfd, (struct sockaddr *)&address, &addrlen);
+
+        int i = getpeername(connfd, (struct sockaddr *)&address, &addrlen);
         printf("The Client  %s is connected on port %d\n", inet_ntoa(address.sin_addr), htons(address.sin_port));
 
-        if ((pid = fork()) == 0) {
+        if ((pid = fork()) == 0)
+        {
             printf("Inside child\n");
             close(listenfd);
             str_echo(connfd, htons(address.sin_port));
@@ -61,5 +68,5 @@ int main() {
         close(connfd);
     }
 
-    return 0 ;
+    return 0;
 }
