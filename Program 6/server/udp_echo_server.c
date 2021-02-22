@@ -28,21 +28,21 @@ void str_echo(int sockfd, struct sockaddr *cli_address, int clilen)
 int main()
 {
   int sockfd;
-  struct sockaddr_in serv_address, cli_address;
+  struct sockaddr_in address;
 
   if ((sockfd = socket(AF_INET, SOCK_DGRAM, 0)) > 0) //sockfd
     printf("The socket was created\n");
 
-  serv_address.sin_family = AF_INET;
-  serv_address.sin_addr.s_addr = INADDR_ANY;
-  serv_address.sin_port = htons(16001);
+  address.sin_family = AF_INET;
+  address.sin_addr.s_addr = INADDR_ANY;
+  address.sin_port = htons(16001);
 
-  printf("The address before bind %s  ...\n", inet_ntoa(serv_address.sin_addr));
+  printf("The address before bind %s  ...\n", inet_ntoa(address.sin_addr));
 
-  if (bind(sockfd, (struct sockaddr *)&serv_address, sizeof(serv_address)) == 0) //bind
+  if (bind(sockfd, (struct sockaddr *)&address, sizeof(address)) == 0) //bind
     printf("Binding Socket\n");
 
-  str_echo(sockfd, (struct sockaddr *)&cli_address, sizeof(cli_address));
+  str_echo(sockfd, (struct sockaddr *)&address, sizeof(address));
 
   return 0;
 }
