@@ -5,21 +5,13 @@
 // have a public key, mix it with a secret key and exchange it publicly, and then mix it with the secret key they have. And here the final key for both is same.
 // first both agree on 2 prime numbers p>g, and then private key is selected in random, and public key is found by using modulo function of private key and, secret key is found by modulo of public key.
 
-int compute(int a, int m, int n) // returns (a^m)modn
+int compute(int a, int n, int m)    // returns (a^m)modn
 {
-	int r;
-	int y = 1;
-
-	while (m > 0)
-	{
-		r = m % 2;
-		if (r == 1)
-			y = (y * a) % n;
-		a = a * a % n;
-
-		m = m / 2;
-	}
-	return y;
+    int i;
+    int temp = a;
+    for (i = 1; i < m; i++)
+        a = (temp * a) % n;
+    return a;
 }
 
 int rand_range(int l, int u)
